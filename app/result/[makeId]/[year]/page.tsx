@@ -1,4 +1,6 @@
-interface Car {
+import MainContent from "./components/main-content";
+
+export interface Car {
   Make_ID: number;
   Make_Name: string;
   Model_ID: number;
@@ -43,32 +45,7 @@ export default async function ResultsPage({
 
   return (
     <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-white min-h-screen">
-      {cars.length > 0 ? (
-        <>
-          <h1 className="text-5xl font-extrabold mb-8 text-center">
-            Car Models for {cars[0].Make_Name} ({year})
-          </h1>
-          <ul className="w-full max-w-3xl grid grid-cols-1 gap-6 max-h-960 overflow-y-auto hide-scrollbar">
-            {cars.map((car, i) => (
-              <li
-                key={car.Model_ID + i}
-                className="border border-gray-600 p-6 rounded-xl bg-gray-700 hover:bg-gray-600 transition-all duration-300"
-              >
-                <p className="text-2xl font-semibold">
-                  {car.Make_Name} - {car.Model_Name}
-                </p>
-                <p className="text-lg text-gray-400 mt-1">
-                  Model ID: {car.Model_ID}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </>
-      ) : (
-        <p className="text-white text-xl mt-6 font-bold">
-          No models found for this selection.
-        </p>
-      )}
+      <MainContent cars={cars} year={year}></MainContent>
     </div>
   );
 }
