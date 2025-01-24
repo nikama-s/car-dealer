@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Car } from "../../page";
 import Link from "next/link";
 import ListOfCars from "../list-of-cars";
+import Error from "@/components/error";
 
 export default function MainContent({
   cars,
@@ -40,9 +41,7 @@ export default function MainContent({
       {filteredCars.length > 0 ? (
         <ListOfCars filteredCars={filteredCars} />
       ) : (
-        <p className="text-white text-xl mt-6 font-bold">
-          No models found for this selection.
-        </p>
+        <Error>No models found for this selection.</Error>
       )}
     </>
   );

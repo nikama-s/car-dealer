@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import MainContent from "./components/main-content";
+import Loader from "@/components/loader";
 
 export interface Car {
   Make_ID: number;
@@ -45,7 +47,9 @@ export default async function ResultsPage({
 
   return (
     <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-white min-h-screen">
-      <MainContent cars={cars} year={year}></MainContent>
+      <Suspense fallback={<Loader />}>
+        <MainContent cars={cars} year={year}></MainContent>
+      </Suspense>
     </div>
   );
 }

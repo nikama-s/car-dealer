@@ -3,6 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import Dropdown from "../menu-with-search";
 import Link from "next/link";
+import Loader from "@/components/loader";
+import Error from "@/components/error";
 
 interface carsType {
   MakeId: number;
@@ -23,8 +25,8 @@ function findAllMakes(arr: carsType[]) {
 export default function Home() {
   const {
     data: cars = [],
-    isLoading,
     isError,
+    isLoading,
   } = useQuery<carsType[]>({
     queryKey: ["cars"],
     queryFn: async () => {
@@ -54,8 +56,8 @@ export default function Home() {
 
   const selectedMakeId = cars.find((car) => car.MakeName === carMake)?.MakeId;
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error</div>;
+  if (isLoading) return <Loader />;
+  if (isError) return <Error>Error loading data</Error>;
 
   return (
     <div className="absolute inset-0 flex flex-col items-center justify-center text-white ">
