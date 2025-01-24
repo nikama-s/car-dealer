@@ -70,7 +70,7 @@ export default function Home() {
       <div className="p-5 pb-4">
         <Dropdown
           options={allMakes}
-          placeholder="Select a car make..."
+          placeholder="Select a make of car..."
           disabled={isYearOpen}
           isOpen={isMakeOpen}
           setIsOpen={setIsMakeOpen}
