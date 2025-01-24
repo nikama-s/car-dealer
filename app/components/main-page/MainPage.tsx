@@ -2,6 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import Dropdown from "../menu-with-search";
+import Link from "next/link";
 
 interface carsType {
   MakeId: number;
@@ -51,6 +52,8 @@ export default function Home() {
   const [carMake, setCarMake] = useState("");
   const [yearMake, setYearMake] = useState("");
 
+  const selectedMakeId = cars.find((car) => car.MakeName === carMake)?.MakeId;
+
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error</div>;
 
@@ -80,12 +83,21 @@ export default function Home() {
           setSelectedValue={setYearMake}
         ></Dropdown>
       </div>
-      <button
-        className="px-6 py-2 bg-gray-500 hover:bg-gray-700 rounded-lg text-white font-semibold disabled:bg-gray-800 disabled:cursor-not-allowed"
-        disabled={!carMake || !yearMake}
+      <Link
+        href={
+          selectedMakeId && yearMake
+            ? `/result/${selectedMakeId}/${yearMake}`
+            : "#"
+        }
+        passHref
       >
-        Next
-      </button>
+        <button
+          className="px-6 py-2 bg-gray-500 hover:bg-gray-700 rounded-lg text-white font-semibold disabled:bg-gray-800 disabled:cursor-not-allowed"
+          disabled={!carMake || !yearMake}
+        >
+          Next
+        </button>
+      </Link>
     </div>
   );
 }
