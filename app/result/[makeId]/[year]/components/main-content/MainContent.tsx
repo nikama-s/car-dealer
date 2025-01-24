@@ -19,7 +19,7 @@ export default function MainContent({
   );
   return (
     <>
-      <h1 className="text-5xl font-extrabold mb-8 text-center">
+      <h1 className="text-3xl md:text-5xl font-extrabold mb-8 text-center">
         Car Models for {cars[0]?.Make_Name} ({year})
       </h1>
       <div className="max-w-3xl w-full flex items-center gap-4 mb-4">
