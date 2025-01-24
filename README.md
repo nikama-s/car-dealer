@@ -1,6 +1,7 @@
 # Car Models Application
 
-This is a responsive web application that displays car models for a selected car make and year. It is built using React, TypeScript, Next.js, and Tailwind CSS. [Live Demo](https://car-dealer-xi.vercel.app/])
+This is a responsive web application that displays car models for a selected car make and year. It is built using React, TypeScript, Next.js, and Tailwind CSS.
+[Live Demo](https://car-dealer-xi.vercel.app/)
 
 ## Installation
 
