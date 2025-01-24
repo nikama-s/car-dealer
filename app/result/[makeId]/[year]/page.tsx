@@ -9,18 +9,22 @@ export interface Car {
   Model_Name: string;
 }
 
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+if (!apiUrl) {
+  throw new Error("API URL is not defined");
+}
+
 async function fetchCars(makeId: string, year: string): Promise<Car[]> {
   const response = await fetch(
-    `https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeIdYear/makeId/${makeId}/modelyear/${year}?format=json`
+    `${apiUrl}/GetModelsForMakeIdYear/makeId/${makeId}/modelyear/${year}?format=json`
   );
   const data = await response.json();
-  console.log(data.Results);
   return data.Results;
 }
 
 export async function generateStaticParams() {
   const makesRes = await fetch(
-    "https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/car?format=json"
+    `${apiUrl}/GetMakesForVehicleType/car?format=json`
   );
   const makesData = await makesRes.json();
   const makes = makesData.Results;

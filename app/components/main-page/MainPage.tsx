@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Dropdown from "../menu-with-search";
 import Link from "next/link";
 import Loader from "@/components/loader";
-import Error from "@/components/error";
+import ErrorComp from "@/components/error";
 
 interface carsType {
   MakeId: number;
@@ -23,6 +23,10 @@ function findAllMakes(arr: carsType[]) {
 }
 
 export default function Home() {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (!apiUrl) {
+    throw new Error("API URL is not defined");
+  }
   const {
     data: cars = [],
     isError,
@@ -31,7 +35,7 @@ export default function Home() {
     queryKey: ["cars"],
     queryFn: async () => {
       const data = await fetch(
-        "https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/car?format=json"
+        `${apiUrl}/GetMakesForVehicleType/car?format=json`
       );
       const res = await data.json();
       return res.Results;
@@ -57,7 +61,7 @@ export default function Home() {
   const selectedMakeId = cars.find((car) => car.MakeName === carMake)?.MakeId;
 
   if (isLoading) return <Loader />;
-  if (isError) return <Error>Error loading data</Error>;
+  if (isError) return <ErrorComp>Error loading data</ErrorComp>;
 
   return (
     <div className="absolute inset-0 flex flex-col items-center justify-center text-white ">
